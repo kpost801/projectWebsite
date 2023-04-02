@@ -88,10 +88,3 @@ btn.onclick = function(event){
 
 // hideForm()
 
-
-
-
- document.querySelector("#myForm").onsubmit= addNewCard
- document.querySelector("#new_card").onclick= hidecards
- document.querySelector(".to-cancel").onclick= hideForm
-displayCards()
