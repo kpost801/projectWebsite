@@ -2,6 +2,7 @@
 /* Your styles go here */
 @import url("bootstrap/dist/css/bootstrap.min.css");
 @import url("bootstrap-icons/font/bootstrap-icons.css");
+
 html{
     scroll-behavior: smooth;
 }
@@ -246,7 +247,7 @@ nav {
 /* hero */
 header {
   min-height: 100vh;
-  background: linear-gradient(rgba(63, 208, 212, 0.5), rgba(0, 0, 0, 0.7))
+  background: linear-gradient(rgba(63, 150, 212, 0.5), rgba(0, 0, 0, 0.7))
     /* url(./hero-bcg.jpeg) center/cover no-repeat; */
 }
 .banner {
@@ -274,20 +275,21 @@ header {
 .title h2 {
   text-align: center;
   text-transform: uppercase;
+  color: blue;
 }
 .title span {
-  color: var(--clr-secondary);
+  color: red;
 }
 #about,
 #teams,
 #home {
   height: 80vh;
 }
-#teams {
+#about {
   background: var(--clr-white);
 }
 footer {
-  background: var(--clr-grey-1);
+  background: grey;
   padding: 5rem 1rem;
 }
 footer p {

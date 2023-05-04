@@ -1,90 +1,64 @@
-//TODO - Your ES6 JavaScript code (if any) goes here
 import "bootstrap"
 
-let initial_cards = [
-    {
-        place: "Salt Lake City, Utah",
-        description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptas atque itaque quod facere vel nostrum, quae illo alias consequatur voluptatem. Laboriosam quod possimus nulla sequi dolorem expedita aut voluptatibus asperiores!",
-        poster: "https://images.unsplash.com/photo-1597778602022-f2d97b8c1493?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1287&q=80"
-    }, {
-        place: "Ancient Cathedral, Salt Lake City, Utah",
-        description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi dignissimos fugiat aperiam, doloribus eius deleniti dicta labore repellendus, eaque odit ut nam? Id autem est voluptatem, dicta dolores voluptates nisi.",
-        poster: "https://images.unsplash.com/photo-1603937372023-251acb738be8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1287&q=80"
+const date = document.getElementById("date");
+date.innerHTML = new Date().getFullYear();
+
+const navtoggle = document.querySelector('.nav-toggle');
+const linksContainer = document.querySelector('.links-container');
+const links = document.querySelector('.links');
+
+navtoggle.addEventListener("click",function(){
+   const linksHeight = links.getBoundingClientRect().height;
+   const containerHeight = linksContainer.getBoundingClientRect().height;
+   if(containerHeight === 0){
+    linksContainer.style.height = `${linksHeight}px`;
+   } else{
+    linksContainer.style.height = 0;
+   }
+});
+
+const navbar = document.getElementById("nav");
+const topLink = document.querySelector(".top-link");
+
+window.addEventListener("scroll", function() {
+    const scrollHeight = window.pageYOffset;
+    const navHeight = navbar.getBoundingClientRect().height;
+    if(scrollHeight > navHeight){
+        navbar.classList.add("fixed-nav");
+    } else{
+        navbar.classList.remove("fixed-nav");
     }
-]
-
-function hideForm(){
-    document.querySelector("#myForm").classList.add('d-none')
-    document.querySelector("#cards").classList.remove('d-none')
-}
-
-function hidecards(){
-    document.querySelector("#myForm").classList.remove('d-none')
-    document.querySelector("#cards").classList.add('d-none')
-}
-
-function getCards(){
-    if(localStorage.getItem('cards') && localStorage.getItem("cards") != '[]'){
-      return JSON.parse(localStorage.getItem('cards'))
-    }else{
-        return initial_cards
+    if(scrollHeight > 500){
+        console.log("hi");
+        topLink.classList.add("show-link");
+    } else {
+        topLink.classList.remove("show-link");
     }
-}
 
-function addNewCard(event){
-    event.preventDefault()
+});
 
-    let t = document.querySelector("#place").value
-    let d = document.querySelector("#description").value
-    let p = document.querySelector("#poster").value
+const scrollLinks = document.querySelectorAll(".scroll-link");
+scrollLinks.forEach((link) => {
+    link.addEventListener("click", (e) => {
+        e.preventDefault();
+        const id = e.currentTarget.getAttribute("href").slice(1);
+        const element = document.getElementById(id);
+        const navHeight = navbar.getBoundingClientRect().height;
+        const containerHeight = linksContainer.getBoundingClientRect().height;
+        const fixedNav = navbar.classList.contains("fixed-nav");
+        let position = element.offsetTop - navHeight;
 
-    let cards = getCards()
-    if(t && d && p){
-        let card = { place: t, description: d, poster: p}
-        cards.push(card)
-        localStorage.setItem('cards',JSON.stringify(cards))
-    }
-    this.reset()
-    displayCards()
-}
+        if(!fixedNav){
+            position = position = navHeight;
+        }
+        if(navHeight > 82) {
+            position = position + counterHeight;
+        }
 
-function displayCards() {
-    let cards = getCards()
-    let cards_html = ''
-    let ndx = 0
-    for (let c of cards) {
-        cards_html += `
-        <div class="card col mb-3" data-ndx="${ndx}">
-  <div class="row g-0">
-    <div class="col-md-4">
-      <img src="${c.poster}" class="img-fluid rounded-start" alt="${c.place}"/>
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h5 class="card-title">${c.place}</h5>
-        <p class="card-text">${c.description}</p>
-        <p class="card-text">
-        <button class = "btn btn-danger to-delete">Delete</button>
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
-        `
-ndx++
-    }
-document.querySelector("#cards").innerHTML = cards_html
-}
-
-document.querySelectorAll('.to-delete').forEach(function(btn){
-btn.onclick = function(event){
-    if(confirm("are you sure you want to delete this card?")){
-        cards.splice(event.target.closest('.col').dataset.ndx,1)
-        localStorage.setItem("cards",JSON.stringify(cards))
-        displayCards()
-    }
-}
-})
-
-// hideForm()
-
+        window.scrollTo({
+            left: 0,
+            top: position,
+        });
+        linksContainer.styel.height =0;
+    });
+});
