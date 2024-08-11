@@ -29,13 +29,6 @@ a{
 img{
     display: block;
 }
-/* .menu{
-    background: url(https://plus.unsplash.com/premium_photo-1667296787659-aacfba2e1e5b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bmJhfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60);
-    background-position: 0 -350px;
-    background-size: cover;
-    padding: 80px 30px;
-   
-} */
 h1,
 h2,
 h3,
@@ -250,6 +243,10 @@ header {
   background: linear-gradient(rgba(63, 150, 212, 0.5), rgba(0, 0, 0, 0.7))
     /* url(./hero-bcg.jpeg) center/cover no-repeat; */
 }
+
+.select{
+  background: linear-gradient(rgba(219, 115, 36, 0.5), rgba(244, 223, 223, 0.7))
+}
 .banner {
   min-height: 100vh;
   display: grid;
@@ -285,8 +282,11 @@ header {
 #home {
   height: 80vh;
 }
-#about {
+#about, .section{
   background: var(--clr-white);
+  
+  border-top: solid 3px black;
+  padding-top: 10px;
 }
 footer {
   background: grey;
